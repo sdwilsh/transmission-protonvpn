@@ -10,7 +10,6 @@ fn main() -> Result<()> {
     let mut n =
         Natpmp::new_with((&gateway).parse().unwrap()).expect("Parsing gateway address failed!");
     let mut client = Client::default();
-    let mut timeout = 250;
 
     let _ = query_gateway(&mut n).expect("Quering Public IP failed!");
 
@@ -86,7 +85,7 @@ fn query_port(
 ) -> Result<MappingResponse> {
     let mut timeout = 250;
     while timeout <= 64000 {
-        n.send_port_mapping_request(Protocol::TCP, 0, 0, 360)
+        let _ = n.send_port_mapping_request(Protocol::TCP, 0, 0, 360)
             .map_err(|err| anyhow!("Fail with {:?}", err));
         println!("Port mapping request sent! (will timeout in {}ms)", timeout);
 

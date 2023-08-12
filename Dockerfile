@@ -1,4 +1,4 @@
-FROM rust:1.63.0-alpine as builder
+FROM rust:1.71.0-alpine as builder
 WORKDIR /usr/src/myapp
 COPY . .
 RUN mkdir -p /root-layer/usr/bin && apk add build-base && cargo build --release && cp /usr/src/myapp/target/release/natpmp-setup /root-layer/usr/bin/
