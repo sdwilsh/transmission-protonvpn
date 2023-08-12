@@ -14,3 +14,4 @@ Just define these environnement variables to your QBittorrent container:
 
 ## License
 
+Licensed under MIT license.
