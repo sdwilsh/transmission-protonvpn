@@ -35,7 +35,7 @@ fn main() -> Result<()> {
 fn update_qbittorrent(client: &mut Client, port: u16) -> Result<()> {
     client
         .post(Url::parse("http://127.0.0.1:8080/api/v2/app/setPreferences").unwrap())
-        .query(&[("json", &format!(r#"{{"listen_port":{}}}"#, port))])
+        .form(&[("json", &format!(r#"{{"listen_port":{}}}"#, port))])
         .send()?
         .error_for_status()?;
     Ok(())
