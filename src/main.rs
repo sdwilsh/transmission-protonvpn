@@ -20,8 +20,7 @@ fn main() -> Result<()> {
             .expect("Every renewal method failed!");
         if mr.public_port() != mr_.public_port() {
             println!("Port has changed, setting incoming port on Transmission...");
-            update_transmission(mr.public_port())
-                .expect("Failed to update Transmission.");
+            update_transmission(mr.public_port()).expect("Failed to update Transmission.");
         }
         mr = mr_;
     }
@@ -76,7 +75,8 @@ fn query_port(
 ) -> Result<MappingResponse> {
     let mut timeout = 250;
     while timeout <= 64000 {
-        let _ = n.send_port_mapping_request(Protocol::TCP, 0, 0, 360)
+        let _ = n
+            .send_port_mapping_request(Protocol::TCP, 0, 0, 360)
             .map_err(|err| anyhow!("Fail with {:?}", err));
         println!("Port mapping request sent! (will timeout in {}ms)", timeout);
 
