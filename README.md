@@ -7,7 +7,7 @@ to allow Transmission to liston on a port via [Proton VPN](https://protonvpn.com
 
 Just define these environnement variables to your Transmission container: 
 
-* `DOCKER_MODS=ghcr.io/sdwilsh/transmission-protonvpn:latest` to enable this mod
+* `DOCKER_MODS=ghcr.io/sdwilsh/transmission-protonvpn:main` to enable this mod
 
 ## License
 
