@@ -1,5 +1,7 @@
 use anyhow::{anyhow, bail, Result};
 use natpmp::*;
+use std::process::Command;
+use std::process::Output;
 use std::thread;
 use std::time::Duration;
 
@@ -26,9 +28,11 @@ fn main() -> Result<()> {
     }
 }
 
-fn update_transmission(port: u16) -> Result<()> {
-    // TODO!
-    Ok(())
+fn update_transmission(port: u16) -> Result<Output, std::io::Error> {
+    Command::new("transmission-remote")
+        .arg("--port")
+        .arg(port.to_string())
+        .output()
 }
 
 fn query_gateway(n: &mut Natpmp) -> Result<GatewayResponse> {
