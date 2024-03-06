@@ -25,8 +25,6 @@ fn main() -> Result<()> {
         }
         mr = mr_;
     }
-
-    Ok(())
 }
 
 fn update_transmission(port: u16) -> Result<()> {
