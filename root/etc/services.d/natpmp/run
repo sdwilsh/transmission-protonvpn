@@ -1,3 +1,3 @@
 #!/usr/bin/with-contenv bash
 
-/usr/bin/transmission-rust
+/usr/bin/transmission-protonvpn
