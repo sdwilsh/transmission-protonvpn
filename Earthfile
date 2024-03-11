@@ -7,6 +7,7 @@ build:
 
 lint:
     BUILD +cargo-clippy
+    BUILD +hadolint
     BUILD +renovate-validate
 
 docker-image:
@@ -14,6 +15,15 @@ docker-image:
     FROM DOCKERFILE \
         -f Dockerfile \
         --platform $TARGETPLATFORM .
+
+hadolint:
+    # renovate: datasource=docker depName=hadolint/hadolint versioning=docker
+    ARG HADOLINT_VERSION=2.12.0-alpine
+    FROM hadolint/hadolint:$HADOLINT_VERSION
+    WORKDIR /images
+    COPY .hadolint.yaml .
+    COPY Dockerfile .
+    RUN hadolint Dockerfile
 
 rust-app:
     WORKDIR ~
