@@ -1,9 +1,19 @@
 VERSION 0.7
 FROM alpine
 
+build:
+    BUILD --platform linux/amd64 +docker-image
+    BUILD --platform linux/arm64 +docker-image
+
 lint:
     BUILD +cargo-clippy
     BUILD +renovate-validate
+
+docker-image:
+    ARG TARGETPLATFORM
+    FROM DOCKERFILE \
+        -f Dockerfile \
+        --platform $TARGETPLATFORM .
 
 rust-app:
     WORKDIR ~
