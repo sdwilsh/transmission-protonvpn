@@ -1,6 +1,27 @@
 VERSION 0.7
 FROM alpine
 
+rust-app:
+    WORKDIR ~
+    COPY Cargo.lock .
+    COPY Cargo.toml .
+    COPY --dir src/ .
+    SAVE ARTIFACT . /src
+
+rust-env:
+    # renovate: datasource=docker depName=rust versioning=docker
+    ARG RUST_VERSION=1.76.0
+    FROM rust:$RUST_VERSION
+    WORKDIR /usr/src/myapp
+    COPY rust-toolchain .
+
+cargo-clippy:
+    FROM +rust-env
+    WORKDIR /usr/src/myapp
+    RUN rustup component add clippy
+    COPY +rust-app/src /usr/src/myapp
+    RUN cargo clippy --all-targets --all-features -- -D warnings
+
 renovate-validate:
     # renovate: datasource=docker depName=renovate/renovate versioning=docker
     ARG RENOVATE_VERSION=37
@@ -10,4 +31,5 @@ renovate-validate:
     RUN renovate-config-validator
 
 lint:
+    BUILD +cargo-clippy
     BUILD +renovate-validate

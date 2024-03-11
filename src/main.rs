@@ -8,7 +8,7 @@ use std::time::Duration;
 fn main() -> Result<()> {
     let gateway = std::env::var("NATPMP_GATEWAY_IP").unwrap_or("10.2.0.1".to_owned());
     let mut n =
-        Natpmp::new_with((&gateway).parse().unwrap()).expect("Parsing gateway address failed!");
+        Natpmp::new_with(gateway.parse().unwrap()).expect("Parsing gateway address failed!");
 
     let _ = query_gateway(&mut n).expect("Quering Public IP failed!");
 
@@ -16,7 +16,7 @@ fn main() -> Result<()> {
     update_transmission(mr.public_port()).expect("Failed to update Transmission.");
 
     loop {
-        thread::sleep(mr.lifetime().clone() / 2); //Renew at half lifetime
+        thread::sleep(*mr.lifetime() / 2); //Renew at half lifetime
         let mr_ = query_port(&mut n, mr.private_port(), mr.public_port(), true)
             .or(query_available_port(&mut n))
             .expect("Every renewal method failed!");
@@ -68,7 +68,7 @@ fn query_gateway(n: &mut Natpmp) -> Result<GatewayResponse> {
 }
 
 fn query_available_port(n: &mut Natpmp) -> Result<MappingResponse> {
-    return query_port(n, 0, 0, false);
+    query_port(n, 0, 0, false)
 }
 
 fn query_port(
