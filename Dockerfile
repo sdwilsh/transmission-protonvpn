@@ -1,4 +1,6 @@
-FROM rust:1.71.0-alpine as builder
+# renovate: datasource=docker depName=rust versioning=docker
+ARG RUST_VERSION=1.76.0
+FROM rust:${RUST_VERSION}-alpine as builder
 WORKDIR /usr/src/myapp
 COPY . .
 RUN mkdir -p /root-layer/usr/bin && apk add build-base && cargo build --release && cp /usr/src/myapp/target/release/transmission-protonvpn /root-layer/usr/bin/
