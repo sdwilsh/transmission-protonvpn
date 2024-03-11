@@ -1,6 +1,10 @@
 VERSION 0.7
 FROM alpine
 
+lint:
+    BUILD +cargo-clippy
+    BUILD +renovate-validate
+
 rust-app:
     WORKDIR ~
     COPY Cargo.lock .
@@ -29,7 +33,3 @@ renovate-validate:
     WORKDIR /usr/src/app
     COPY renovate.json .
     RUN renovate-config-validator
-
-lint:
-    BUILD +cargo-clippy
-    BUILD +renovate-validate
