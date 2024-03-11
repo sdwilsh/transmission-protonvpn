@@ -36,6 +36,7 @@
   "extends": [
     "config:recommended"
   ],
+  "includeForks": true,
   "packageRules": [
     {
         "automerge": true,
