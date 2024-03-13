@@ -60,9 +60,9 @@ dependencies = [
 
 [[package]]
 name = "natpmp"
-version = "0.3.2"
+version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "19eaefbb33f9a03984c5e85e764b8db45444146bc277c9346054f453a62976ad"
+checksum = "af64b35cc5e1edfc808060c64d399d483c5269b6af3c357f43ee07234d5fa787"
 dependencies = [
  "async-trait",
  "cc",
