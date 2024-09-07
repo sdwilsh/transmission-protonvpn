@@ -1,5 +1,5 @@
 # renovate: datasource=docker depName=rust versioning=docker
-ARG RUST_VERSION=1.80.1
+ARG RUST_VERSION=1.81.0
 FROM rust:${RUST_VERSION}-alpine as builder
 WORKDIR /usr/src/myapp
 COPY . .
