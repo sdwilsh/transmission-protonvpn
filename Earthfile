@@ -18,7 +18,7 @@ docker-image:
 
 hadolint:
     # renovate: datasource=docker depName=hadolint/hadolint versioning=docker
-    ARG HADOLINT_VERSION=2.12.0-alpine
+    ARG HADOLINT_VERSION=v2.13.1-alpine
     FROM hadolint/hadolint:$HADOLINT_VERSION
     WORKDIR /images
     COPY .hadolint.yaml .
