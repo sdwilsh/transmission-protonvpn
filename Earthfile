@@ -34,7 +34,7 @@ rust-app:
 
 rust-env:
     # renovate: datasource=docker depName=rust versioning=docker
-    ARG RUST_VERSION=1.93.0
+    ARG RUST_VERSION=1.93.1
     FROM rust:$RUST_VERSION
     WORKDIR /usr/src/myapp
     COPY rust-toolchain .
